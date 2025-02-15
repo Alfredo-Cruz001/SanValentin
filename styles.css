@@ -1,0 +1,259 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animación de corazones flotando */
+.hearts-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Coloca los corazones en el fondo */
+    pointer-events: none; /* Para que no interfieran con el clic en los botones */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.heart {
+    font-size: 40px; /* Tamaño de los corazones */
+    animation: heartAnimation 10s infinite;
+    opacity: 0.8;
+    margin: 10px;
+}
+
+/* Animación de los corazones */
+@keyframes heartAnimation {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Títulos */
+.titles {
+    position: absolute;
+    top: 50px;
+    text-align: center;
+    z-index: 1; /* Asegura que los títulos estén por encima de la caja */
+    width: 100%;
+}
+
+.animated-title {
+    font-size: 3rem; /* Grande para "Feliz Día de San Valentín" */
+    color: #ff3366;
+    animation: fadeIn 2s ease-out;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.2rem; /* Más pequeño para "Digita la clave" */
+    color: #ff6699;
+    margin-bottom: 30px;
+}
+
+/* Animación para el texto */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Contenedor principal (caja de seguridad) */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    position: relative;
+    z-index: 2; /* Coloca la caja por encima de los corazones */
+}
+
+/* Estilo para el cuadro de input */
+.input-box {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: not-allowed; /* Solo lectura */
+}
+
+/* Contenedor de los botones */
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px; /* Menos espacio entre botones */
+    justify-items: center;
+}
+
+/* Estilo para los botones */
+.num-button {
+    padding: 15px;
+    font-size: 1.5rem;
+    background-color: #ff3366;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50px;
+}
+
+.num-button:hover {
+    background-color: #ff6699;
+}
+
+.num-button:active {
+    background-color: #e60046;
+}
+
+/* Botón de aceptar */
+.accept-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.accept-button:hover {
+    background-color: #218838;
+}
+
+.accept-button:active {
+    background-color: #1e7e34;
+}
+
+/* Estilo del mensaje de éxito */
+.success-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 128, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    z-index: 3; /* Asegura que esté por encima de todo */
+}
+
+/* MEDIA QUERIES: Adaptación para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    /* Títulos más pequeños en pantallas más pequeñas */
+    .animated-title {
+        font-size: 2.5rem; /* Reducimos el tamaño de "Feliz Día de San Valentín" */
+    }
+
+    h2 {
+        font-size: 1rem; /* Más pequeño para "Digita la clave" */
+    }
+
+    .container {
+        width: 90%; /* Hacemos que la caja de seguridad ocupe más espacio en pantallas pequeñas */
+        padding: 20px;
+    }
+
+    .input-box input {
+        font-size: 1.3rem; /* Ajustamos el tamaño de la fuente del input */
+    }
+
+    .num-button {
+        padding: 10px;
+        font-size: 1.2rem; /* Reducimos el tamaño de los botones */
+        width: 40px;
+    }
+
+    .accept-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    /* Corazones más pequeños en pantallas pequeñas */
+    .heart {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Pantallas de iPhone 11 a iPhone 13 Pro Max */
+    .animated-title {
+        font-size: 2rem; /* Más pequeño en pantallas más pequeñas */
+    }
+
+    h2 {
+        font-size: 0.9rem; /* Más pequeño para el segundo título */
+    }
+
+    .container {
+        width: 80%; /* Caja de seguridad aún más grande en pantallas pequeñas */
+        padding: 15px;
+    }
+
+    .input-box input {
+        font-size: 1.2rem; /* Ajustamos aún más el tamaño del input */
+    }
+
+    .num-button {
+        padding: 10px;
+        font-size: 1rem;
+        width: 40px;
+    }
+
+    .accept-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .heart {
+        font-size: 25px; /* Corazones más pequeños en pantallas muy pequeñas */
+    }
+}
+.gif-container {
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;      /* Centra verticalmente */
+    width: 100%;
+    max-width: 100%;          /* Evita que el GIF se salga de la pantalla */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Para que el GIF no se sobreponga o desborde */
+.tenor-gif-embed {
+    max-width: 100%;
+    width: 100%; /* Ajusta el tamaño del GIF al 100% del contenedor */
+    height: auto;
+}
