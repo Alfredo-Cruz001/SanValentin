@@ -1,1 +1,125 @@
-<h1>San Valentin</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Día De San Valentín</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Títulos -->
+    <div class="titles">
+        <h1 class="animated-title">Feliz Día de San Valentín</h1>
+        <h2>Digita la clave: es una fecha especial</h2>
+        <div class="gif-container">
+            <div class="tenor-gif-embed" data-postid="12629573953728339553" data-share-method="host" data-aspect-ratio="1" data-width="10%">
+                <a href="https://tenor.com/view/sseeyall-bubu-dudu-gif-12629573953728339553">Sseeyall Bubu Dudu Sticker</a> from 
+            </div>
+            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+        </div>
+    </div>
+
+    <!-- Efectos de San Valentín: Corazones flotando -->
+    <div class="hearts-animation">
+        <span class="heart" style="animation-delay: 0s;">💖</span>
+        <span class="heart" style="animation-delay: 2s;">❤️</span>
+        <span class="heart" style="animation-delay: 4s;">💘</span>
+        <span class="heart" style="animation-delay: 6s;">💝</span>
+        <span class="heart" style="animation-delay: 8s;">💗</span>
+        <span class="heart" style="animation-delay: 10s;">💓</span>
+        <span class="heart" style="animation-delay: 12s;">💕</span>
+        <span class="heart" style="animation-delay: 14s;">💞</span>
+        <span class="heart" style="animation-delay: 16s;">💖</span>
+    </div>
+
+    <!-- Caja de seguridad con el input y botones -->
+    <div class="container">
+        <div class="input-box">
+            <input type="text" id="input" readonly placeholder="Introduce la combinación">
+        </div>
+        <div class="buttons-container">
+            <button class="num-button" onclick="addNumber(1)">1</button>
+            <button class="num-button" onclick="addNumber(2)">2</button>
+            <button class="num-button" onclick="addNumber(3)">3</button>
+            <button class="num-button" onclick="addNumber(4)">4</button>
+            <button class="num-button" onclick="addNumber(5)">5</button>
+            <button class="num-button" onclick="addNumber(6)">6</button>
+            <button class="num-button" onclick="addNumber(7)">7</button>
+            <button class="num-button" onclick="addNumber(8)">8</button>
+            <button class="num-button" onclick="addNumber(9)">9</button>
+            <button class="num-button" onclick="addNumber(0)">0</button>
+        </div>
+        <button class="accept-button" id="accept-button" onclick="checkCombination()">Aceptar</button>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    <div id="success-message" class="success-message">
+        ¡Felicidades! Lo has logrado. Obtén tus sorpresas.
+    </div>
+
+    <script>
+        // Combinación correcta (encriptada)
+        const correctCombination = '31072019'; // La combinación original
+        let hashedCombination;
+
+        // Función para encriptar la clave
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Hash de la combinación correcta (hace el hash al cargar la página)
+        window.onload = async function() {
+            hashedCombination = await hashPassword(correctCombination);
+            console.log("Hashed Combination: ", hashedCombination);
+        };
+
+        // Añadir números al input
+        function addNumber(number) {
+            const input = document.getElementById('input');
+            input.value += number;
+            checkInputLength(); // Comprobar si el input tiene 8 caracteres
+        }
+
+        // Comprobar la longitud del input y habilitar el botón si es correcto
+        function checkInputLength() {
+            const input = document.getElementById('input');
+            const acceptButton = document.getElementById('accept-button');
+            if (input.value.length === 8) {
+                acceptButton.disabled = false;  // Habilitar el botón de aceptar
+                acceptButton.style.backgroundColor = '#28a745'; // Color verde cuando esté habilitado
+            } else {
+                acceptButton.disabled = true;  // Deshabilitar el botón si no son 8 dígitos
+                acceptButton.style.backgroundColor = '#ccc'; // Color gris cuando está deshabilitado
+            }
+        }
+
+        // Comprobar la combinación
+        async function checkCombination() {
+            const input = document.getElementById('input');
+            const inputHash = await hashPassword(input.value);
+
+            if (inputHash === hashedCombination) {
+                // Mostrar el mensaje de éxito
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Esperar 3 segundos y redirigir a la página de sorpresas
+                setTimeout(function() {
+                    window.location.href = "sorpresas.html"; // Redirigir a sorpresas.html
+                }, 3000); // Redirigir después de 3 segundos
+            } else {
+                // Si la combinación es incorrecta y la longitud es 8, borramos el input
+                if (input.value.length === 8) {
+                    input.value = '';  // Limpiar el input automáticamente
+                } else {
+                    alert("Combinación incorrecta. Intenta de nuevo.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
