@@ -1,0 +1,82 @@
+/* Fondo y estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5c6cb; /* Fondo rosa */
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Contenedor principal */
+.container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+/* Títulos */
+h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Estilos de los títulos de las sorpresas y enlaces */
+.sorpresa h2 {
+    font-size: 1.5rem;
+    margin: 15px 0;
+    color: #ff66b2; /* Color rosa */
+}
+
+.sorpresa a {
+    text-decoration: none;
+    color: #ff66b2; /* Color rosa */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.sorpresa a:hover {
+    color: #ff3385; /* Un rosa más intenso al pasar el mouse */
+}
+
+/* Estilo para las sorpresas */
+.sorpresa p {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+/* Estilos de los corazones flotantes */
+.hearts-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Coloca los corazones en el fondo */
+    pointer-events: none; /* Para que no interfieran con el clic en los botones */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.heart {
+    font-size: 40px; /* Tamaño de los corazones */
+    animation: heartAnimation 10s infinite;
+    opacity: 0.8;
+    margin: 10px;
+}
+
+/* Animación de los corazones */
+@keyframes heartAnimation {
+    0% {
+        transform: translateY(100vh) rotate(0deg); /* Inicia desde la parte inferior */
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg); /* Sube hasta la parte superior */
+        opacity: 0; /* Se desvanecen al subir */
+    }
+}
+
